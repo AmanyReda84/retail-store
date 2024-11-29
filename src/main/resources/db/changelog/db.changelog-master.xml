@@ -1,0 +1,31 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="yourname">
+        <createCollection collectionName="User"/>
+        <createCollection collectionName="Bill"/>
+        <createCollection collectionName="Item"/>
+        <createCollection collectionName="Bill_Item"/>
+
+        <insert collectionName="User">
+            <column name="id" value="1"/>
+            <column name="name" value="John Doe"/>
+        </insert>
+        <insert collectionName="Bill">
+            <column name="id" value="1"/>
+            <column name="amount" value="100.0"/>
+        </insert>
+        <insert collectionName="Item">
+            <column name="id" value="1"/>
+            <column name="description" value="Sample Item"/>
+        </insert>
+        <insert collectionName="Bill_Item">
+            <column name="bill_id" value="1"/>
+            <column name="item_id" value="1"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
