@@ -60,6 +60,6 @@ when
 then
     System.out.println("In Apply Final Discount"+$bill.getPercentageDiscountValue() +" "+ $bill.getTotalAmount() + " "+ $bill.getFlatRateDiscountValue());
     finalBill.setTotalDiscount($bill.getPercentageDiscountValue() + $bill.getFlatRateDiscountValue());
-    finalBill.setTotalAfterDiscount($bill.getTotalAmount() - ($bill.getPercentageDiscountValue() + $bill.getFlatRateDiscountValue()));
+    finalBill.setTotalAmountAfterDiscount($bill.getTotalAmount() - ($bill.getPercentageDiscountValue() + $bill.getFlatRateDiscountValue()));
 
 end
