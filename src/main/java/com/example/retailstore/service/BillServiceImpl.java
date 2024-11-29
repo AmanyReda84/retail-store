@@ -33,9 +33,8 @@ public class BillServiceImpl implements BillService{
             throw new IllegalArgumentException("Invalid User ID");
 
         // Calculate Total Amount
-
         bill.setTotalAmount(bill.getItems().stream().mapToDouble(i-> i.getQuantity() * i.getPrice()).sum());
-        bill.setTotalAmountNoGrocery(bill.getItems().stream().filter(i-> !i.isGrocery()).mapToDouble(i-> i.getQuantity() * i.getPrice()).sum());
+        bill.setTotalAmountNonGrocery(bill.getItems().stream().filter(i-> !i.isGrocery()).mapToDouble(i-> i.getQuantity() * i.getPrice()).sum());
 
         // calculate discount
         Bill finalBill = discountCalculatorService.calculateDiscount(bill, user.get());

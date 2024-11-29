@@ -22,9 +22,8 @@ public class UserController {
 
     @GetMapping
     @Operation(summary = "List User" , description = "Get All User")
-    public List<User> getUsers() {
-
-        return userService.findAll();
+    public ResponseEntity<List<User>> getUsers() {
+        return new ResponseEntity<>( userService.findAll(), HttpStatus.OK);
 
     }
 

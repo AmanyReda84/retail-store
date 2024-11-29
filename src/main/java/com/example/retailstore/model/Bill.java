@@ -20,13 +20,21 @@ public class Bill {
     private String code;
     private String userId;
     private Date date;
-    private double totalAmount;
-    private double totalAmountNoGrocery;
-    private double percentageDiscount;
-    private double flatRateDiscountValue;
-    private double percentageDiscountValue;
-    private double totalDiscount;
-    private double totalAfterDiscount;
     private List<Item> items;
+
+    // % discount
+    private double percentageDiscount;
+    private double percentageDiscountValue;
+
+    // flat rate discount
+    private double flatRateDiscountValue;
+
+    private double totalDiscount;
+
+    // totals
+    private double totalAmount;
+    private double totalAmountNonGrocery;
+    private double totalAmountAfterDiscount;
+
 
 }

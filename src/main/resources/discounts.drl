@@ -13,7 +13,7 @@ when
 then
     System.out.println("In employee user rule");
     $bill.setPercentageDiscount(30);
-    finalBill.setPercentageDiscount(30);
+
 
 end
 
@@ -22,10 +22,8 @@ when
     $user: User(type == "affiliate")
     $bill: Bill()
 then
-    System.out.println("In affliate user rule");
+    System.out.println("In affiliate user rule");
     $bill.setPercentageDiscount(10);
-    finalBill.setPercentageDiscount(10);
-
 end
 
 rule "Loyal Customer Discount"
@@ -35,22 +33,19 @@ when
 then
     System.out.println("In Loyal Customer Rule");
     $bill.setPercentageDiscount(5);
-    finalBill.setPercentageDiscount(5);
-
 end
 
 rule "Apply Percentage Discount"
 when
     $bill: Bill(percentageDiscount >= 0)
 then
-    System.out.println("In Apply Percentage Discount"+$bill.getPercentageDiscount() +" "+ $bill.getTotalAmountNoGrocery());
-    // Ensure only one percentage discount is applied
+    System.out.println("In Apply Percentage Discount"+$bill.getPercentageDiscount() +" "+ $bill.getTotalAmountNonGrocery());
     finalBill.setPercentageDiscount($bill.getPercentageDiscount());
-    finalBill.setPercentageDiscountValue($bill.getTotalAmountNoGrocery() * $bill.getPercentageDiscount() / 100);
+    finalBill.setPercentageDiscountValue($bill.getTotalAmountNonGrocery() * $bill.getPercentageDiscount() / 100);
 
 end
 
-rule "Apply Flat Discount"
+rule "Apply Flat Rate Discount for every 100"
 when
     $bill: Bill((totalAmount - percentageDiscountValue) >= 100)
 then
