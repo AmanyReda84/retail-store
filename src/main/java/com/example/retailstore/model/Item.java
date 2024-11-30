@@ -16,4 +16,10 @@ public class Item {
     private double price;
     private boolean isGrocery;
 
+    public Item (String itemId , double price , boolean isGrocery){
+        this.itemId = itemId;
+        this.price = price;
+        this.isGrocery = isGrocery;
+    }
+
 }

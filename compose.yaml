@@ -7,12 +7,8 @@ services:
     restart: always
     environment:
       MONGO_INITDB_DATABASE: retailStoreDB
-#      MONGO_INITDB_USERNAME: user
-#      MONGO_INITDB_PASSWORD: userPassword
-      #MONGO_INITDB_ROOT_USERNAME: admin
-      #MONGO_INITDB_ROOT_PASSWORD: adminPassword
     ports:
-      - "27017:27017"
+      - "27018:27017"
     volumes:
       - mongo-data:/data/db
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
@@ -27,6 +23,5 @@ services:
       - mongodb
     ports:
       - "8081:8080"
-
 volumes:
   mongo-data:

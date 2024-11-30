@@ -1,0 +1,65 @@
+import com.example.retailstore.model.User
+import com.example.retailstore.model.Bill
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.temporal.ChronoUnit
+
+global com.example.retailstore.model.Bill finalBill
+
+rule "Employee Discount"
+when
+    $user: User(type == "employee")
+    $bill: Bill()
+then
+    System.out.println("In employee user rule");
+    $bill.setPercentageDiscount(30);
+
+
+end
+
+rule "Affiliate Discount"
+when
+    $user: User(type == "affiliate")
+    $bill: Bill()
+then
+    System.out.println("In affiliate user rule");
+    $bill.setPercentageDiscount(10);
+end
+
+rule "Loyal Customer Discount"
+when
+    $user: User(ChronoUnit.YEARS.between($user.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now()) > 2)
+    $bill: Bill()
+then
+    System.out.println("In Loyal Customer Rule");
+    $bill.setPercentageDiscount(5);
+end
+
+rule "Apply Percentage Discount"
+when
+    $bill: Bill(percentageDiscount >= 0)
+then
+    System.out.println("In Apply Percentage Discount"+$bill.getPercentageDiscount() +" "+ $bill.getTotalAmountNonGrocery());
+    finalBill.setPercentageDiscount($bill.getPercentageDiscount());
+    finalBill.setPercentageDiscountValue($bill.getTotalAmountNonGrocery() * $bill.getPercentageDiscount() / 100);
+
+end
+
+rule "Apply Flat Rate Discount for every 100"
+when
+    $bill: Bill((totalAmount - percentageDiscountValue) >= 100)
+then
+    System.out.println("In Apply Flat Rate Discount"+$bill.getPercentageDiscountValue() +" "+ $bill.getTotalAmount());
+    finalBill.setFlatRateDiscountValue((int)(($bill.getTotalAmount() - $bill.getPercentageDiscountValue()) / 100) * 5);
+
+end
+
+rule "Apply Final Discount"
+when
+    $bill: Bill(percentageDiscountValue >= 0.0 || flatRateDiscountValue >= 0.0)
+then
+    System.out.println("In Apply Final Discount"+$bill.getPercentageDiscountValue() +" "+ $bill.getTotalAmount() + " "+ $bill.getFlatRateDiscountValue());
+    finalBill.setTotalDiscount($bill.getPercentageDiscountValue() + $bill.getFlatRateDiscountValue());
+    finalBill.setTotalAmountAfterDiscount($bill.getTotalAmount() - ($bill.getPercentageDiscountValue() + $bill.getFlatRateDiscountValue()));
+
+end
