@@ -35,7 +35,7 @@ Application Assumptions/Notes:
   - Bill APIs
     - GET: Lists all bills in DB , initially no bills until you submit bill.
     - POST: Submit new bill where it calculates the discount and save Bill to DB:
-    Request:
+    - **Request:**
       {
       "id": "2",
       "code": "bill_code",
@@ -58,7 +58,8 @@ Application Assumptions/Notes:
       }
       ]
       } 
-    Response:
+    
+    - **Response:**
       {
       "id": "2",
       "code": "bill_code",
@@ -91,3 +92,12 @@ Application Assumptions/Notes:
     - Users API:
       - GET: Return all users in DB , initially the 4 users preloaded in DB.
       - POST: Save new user in DB.
+Deployment/Run Steps:
+      - Checkout code.
+      - cd to local code directory
+      - Run "docker compose up"
+To Run Test Cases:
+      - mvn test
+      - mvn clean jacoco:prepare-agent test jacoco:report
+
+      
