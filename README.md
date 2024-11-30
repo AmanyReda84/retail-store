@@ -89,15 +89,17 @@ Application Assumptions/Notes:
       "totalAmountNonGrocery": 50,
       "totalAmountAfterDiscount": 85**
       }
-    - Users API:
-      - GET: Return all users in DB , initially the 4 users preloaded in DB.
-      - POST: Save new user in DB.
-Deployment/Run Steps:
-      - Checkout code.
-      - cd to local code directory
-      - Run "docker compose up"
-To Run Test Cases:
-      - mvn test
-      - mvn clean jacoco:prepare-agent test jacoco:report
+  - Users API:
+    - GET: Return all users in DB , initially the 4 users preloaded in DB.
+    - POST: Save new user in DB.
+
+**Deployment/Run Steps:**
+- Checkout code. 
+- cd to local code directory 
+- Run "docker compose up"
+
+**To Run Test Cases:**
+- mvn test 
+- mvn clean jacoco:prepare-agent test jacoco:report
 
       
